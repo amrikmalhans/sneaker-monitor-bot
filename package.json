@@ -1,0 +1,19 @@
+{
+  "name": "server-bot",
+  "version": "1.0.0",
+  "description": "discord bot that shows scraped info",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amrik Malhans",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "firebase-admin": "^9.0.0",
+    "puppeteer": "^5.1.0",
+    "puppeteer-cluster": "^0.21.0",
+    "rimraf": "^3.0.2"
+  }
+}
