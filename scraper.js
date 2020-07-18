@@ -23,7 +23,7 @@ async function scrapeData() {
     }
     console.log(stuff);
 
-    const docRef = db.collection('users').doc('alovelace');
+    const docRef = db.collection('nike').doc('launch');
 
     await docRef.set({stuff}).then(() => {
       console.log('saved!!!!!!!!');
@@ -35,7 +35,7 @@ async function scrapeData() {
   const supImg = await page.$$("img")
   const arr = []
   for (let element of supLink) {
-    const attr1 = await page.evaluate(el => el.querySelector('li'), element);
+    const attr1 = await page.evaluate(el => el.querySelector('li').innerHTML, element);
     console.log(attr1);
 
   }
