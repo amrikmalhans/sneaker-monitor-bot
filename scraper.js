@@ -10,9 +10,9 @@ const db = admin.firestore()
 async function scrapeData() {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto('https://www.nike.com/launch?s=in-stock', {waitUntil: 'load', timeout: 0});
+    await page.goto('https://www.nike.com/launch', {waitUntil: 'load', timeout: 0});
 
-    const textContent = await page.$$('.card-link')
+    const textContent = await page.$$("[data-qa='product-card-link']")
 
     const stuff = []
     for (let element of textContent) {
@@ -27,18 +27,29 @@ async function scrapeData() {
 
     await docRef.set({stuff}).then(() => {
       console.log('saved!!!!!!!!');
-    });
+    }); 
 
-  await page.goto('https://www.nike.com/launch', {waitUntil: 'load', timeout: 0});
+  await page.goto('https://www.supremenewyork.com/shop', {waitUntil: 'load', timeout: 0});
 
-  const textContent2 = await page.evaluate(() => document.querySelector("[data-qa='product-card-0']").innerHTML);
+  const supLink = await page.$$("#shop-scroller")
+  const supImg = await page.$$("img")
+  const arr = []
+  for (let element of supLink) {
+    const attr1 = await page.evaluate(el => el.querySelector('li'), element);
+    console.log(attr1);
 
-console.log(textContent2);
+  }
+  for (let element of supImg) {
+    const attr2 = await page.evaluate(el => el.getAttribute("src"), element);
+    arr.push(attr2)
+  }
+  console.log(arr);
+
 
 
 await page.goto('https://cactusplantfleamarket.com/', {waitUntil: 'load', timeout: 0});
 
-  const textContent3 = await page.evaluate(() => document.querySelector('.item').innerHTML);
+  const textContent3 = await page.evaluate(() => document.querySelector('.item'));
 
 console.log(textContent3);
     
